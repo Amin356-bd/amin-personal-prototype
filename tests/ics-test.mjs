@@ -1,0 +1,11 @@
+import {makeIcs,alarmIntent,fold} from "../js/ics.js";
+const enc=new TextEncoder();const fails=[];const ok=(c,m)=>{if(!c)fails.push(m)};
+const t=makeIcs([{id:"x",start:new Date(Date.UTC(2026,10,1,8,0,0)),title:"AMIN পরীক্ষা: এটি একটি বেশ লম্বা বাংলা শিরোনাম যা ৭৫ অক্টেটের বেশি হয়, যাতে ফোল্ডিং পরীক্ষা হয়"}],new Date(Date.UTC(2026,10,1,5,0,0)));
+const phys=t.split("\r\n");ok(t.endsWith("\r\n"),"ends CRLF");ok(!/[^\r]\n/.test(t),"no bare LF");
+ok(phys.every(l=>enc.encode(l).length<=75),"lines ≤75 octets");
+const unfolded=t.replace(/\r\n /g,"");
+for(const k of ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:","BEGIN:VEVENT","UID:","DTSTAMP:20261101T050000Z","DTSTART:20261101T080000Z","DTEND:20261101T081000Z","BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:","TRIGGER:-PT0M","END:VALARM","END:VEVENT","END:VCALENDAR"])ok(unfolded.includes(k),"missing "+k);
+ok(unfolded.includes("পরীক্ষা: এটি একটি বেশ লম্বা বাংলা শিরোনাম যা ৭৫ অক্টেটের বেশি হয়, যাতে ফোল্ডিং পরীক্ষা হয়".replace(/,/g,"\\,")),"title survives fold/unfold (comma escaped)");
+ok(phys.some(l=>l.startsWith(" ")),"folding happened");
+const a=alarmIntent(14,5,"AMIN পরীক্ষা");ok(/^intent:#Intent;action=android\.intent\.action\.SET_ALARM;i\.android\.intent\.extra\.alarm\.HOUR=14;i\.android\.intent\.extra\.alarm\.MINUTES=5;S\.android\.intent\.extra\.alarm\.MESSAGE=[^;]+;B\.android\.intent\.extra\.alarm\.SKIP_UI=false;end$/.test(a),"intent shape");
+console.log(JSON.stringify({failures:fails,physicalLines:phys.length,maxOctets:Math.max(...phys.map(l=>enc.encode(l).length))}));
