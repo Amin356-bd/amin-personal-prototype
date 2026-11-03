@@ -1,0 +1,320 @@
+{
+"source": "ইসলামিক ফাউন্ডেশন স্থায়ী সময়সূচীর শেষ দুই পাতা (হাতে তোলা)",
+"districts": [
+{
+"name": "ঢাকা",
+"sahri": 0,
+"iftar": 0
+},
+{
+"name": "গাজীপুর",
+"sahri": 1,
+"iftar": 1
+},
+{
+"name": "শরীয়তপুর",
+"sahri": 1,
+"iftar": 1
+},
+{
+"name": "মাদারীপুর",
+"sahri": 1,
+"iftar": 1
+},
+{
+"name": "পিরোজপুর",
+"sahri": 1,
+"iftar": 1
+},
+{
+"name": "বরিশাল",
+"sahri": 1,
+"iftar": 1
+},
+{
+"name": "ঝালকাঠী",
+"sahri": 1,
+"iftar": 1
+},
+{
+"name": "বরগুনা",
+"sahri": 1,
+"iftar": 1
+},
+{
+"name": "ময়মনসিংহ",
+"sahri": 2,
+"iftar": 2
+},
+{
+"name": "টাঙ্গাইল",
+"sahri": 2,
+"iftar": 2
+},
+{
+"name": "বাগেরহাট",
+"sahri": 2,
+"iftar": 2
+},
+{
+"name": "জামালপুর",
+"sahri": 2,
+"iftar": 2
+},
+{
+"name": "শেরপুর",
+"sahri": 2,
+"iftar": 2
+},
+{
+"name": "মানিকগঞ্জ",
+"sahri": 2,
+"iftar": 2
+},
+{
+"name": "ফরিদপুর",
+"sahri": 3,
+"iftar": 3
+},
+{
+"name": "গোপালগঞ্জ",
+"sahri": 3,
+"iftar": 3
+},
+{
+"name": "সিরাজগঞ্জ",
+"sahri": 3,
+"iftar": 3
+},
+{
+"name": "নড়াইল",
+"sahri": 3,
+"iftar": 3
+},
+{
+"name": "খুলনা",
+"sahri": 3,
+"iftar": 3
+},
+{
+"name": "মাগুড়া",
+"sahri": 4,
+"iftar": 4
+},
+{
+"name": "রাজবাড়ী",
+"sahri": 4,
+"iftar": 4
+},
+{
+"name": "পাবনা",
+"sahri": 4,
+"iftar": 4
+},
+{
+"name": "সাতক্ষীরা",
+"sahri": 6,
+"iftar": 6
+},
+{
+"name": "কুষ্টিয়া",
+"sahri": 6,
+"iftar": 6
+},
+{
+"name": "যশোর",
+"sahri": 6,
+"iftar": 6
+},
+{
+"name": "রংপুর",
+"sahri": 6,
+"iftar": 6
+},
+{
+"name": "ঝিনাইদহ",
+"sahri": 6,
+"iftar": 6
+},
+{
+"name": "নিলফামারী",
+"sahri": 6,
+"iftar": 6
+},
+{
+"name": "চুয়াডাঙ্গা",
+"sahri": 6,
+"iftar": 6
+},
+{
+"name": "কুড়িগ্রাম",
+"sahri": 6,
+"iftar": 6
+},
+{
+"name": "গাইবান্ধা",
+"sahri": 6,
+"iftar": 6
+},
+{
+"name": "রাজশাহী",
+"sahri": 7,
+"iftar": 7
+},
+{
+"name": "বগুড়া",
+"sahri": 7,
+"iftar": 7
+},
+{
+"name": "মেহেরপুর",
+"sahri": 7,
+"iftar": 7
+},
+{
+"name": "লালমনির হাট",
+"sahri": 7,
+"iftar": 7
+},
+{
+"name": "চাপাইনবাবগঞ্জ",
+"sahri": 8,
+"iftar": 8
+},
+{
+"name": "নওগাঁ",
+"sahri": 8,
+"iftar": 8
+},
+{
+"name": "নাটোর",
+"sahri": 8,
+"iftar": 8
+},
+{
+"name": "দিনাজপুর",
+"sahri": 6,
+"iftar": 11
+},
+{
+"name": "ঠাকুরগাঁও",
+"sahri": 6,
+"iftar": 11
+},
+{
+"name": "পঞ্চগড়",
+"sahri": 6,
+"iftar": 11
+},
+{
+"name": "নরসিংদী",
+"sahri": -1,
+"iftar": -1
+},
+{
+"name": "নারায়নগঞ্জ",
+"sahri": -1,
+"iftar": -1
+},
+{
+"name": "মুন্সীগঞ্জ",
+"sahri": -1,
+"iftar": -1
+},
+{
+"name": "চাঁদপুর",
+"sahri": -1,
+"iftar": -1
+},
+{
+"name": "কিশোরগঞ্জ",
+"sahri": -2,
+"iftar": -2
+},
+{
+"name": "পটুয়াখালী",
+"sahri": -2,
+"iftar": -2
+},
+{
+"name": "ভোলা",
+"sahri": -2,
+"iftar": -2
+},
+{
+"name": "লক্ষ্মীপুর",
+"sahri": -2,
+"iftar": -2
+},
+{
+"name": "নেত্রকোনা",
+"sahri": -3,
+"iftar": -3
+},
+{
+"name": "কমিল্লা",
+"sahri": -3,
+"iftar": -3
+},
+{
+"name": "বি-বাড়িয়া",
+"sahri": -3,
+"iftar": -3
+},
+{
+"name": "নোয়াখালী",
+"sahri": -4,
+"iftar": -4
+},
+{
+"name": "ফেনী",
+"sahri": -4,
+"iftar": -4
+},
+{
+"name": "সুনামগঞ্জ",
+"sahri": -4,
+"iftar": -4
+},
+{
+"name": "হবিগঞ্জ",
+"sahri": -4,
+"iftar": -4
+},
+{
+"name": "চট্টগ্রাম",
+"sahri": -5,
+"iftar": -5
+},
+{
+"name": "কক্সবাজার",
+"sahri": -6,
+"iftar": -6
+},
+{
+"name": "সিলেট",
+"sahri": -6,
+"iftar": -6
+},
+{
+"name": "মৌলভী বাজার",
+"sahri": -6,
+"iftar": -6
+},
+{
+"name": "খাগড়াছড়ি",
+"sahri": -7,
+"iftar": -7
+},
+{
+"name": "রাঙ্গামাটি",
+"sahri": -7,
+"iftar": -7
+},
+{
+"name": "বান্দরবান",
+"sahri": -7,
+"iftar": -7
+}
+]
+}
