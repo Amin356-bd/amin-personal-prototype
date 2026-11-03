@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    // v1: শুধু মালিক। OWNER_UID বদলান (প্রথম সাইন-ইনের পর "সাইন-ইন" পাতা থেকে UID কপি)।
+    function isOwner() { return request.auth != null && request.auth.uid == 'OWNER_UID'; }
+
+    match /users/{uid}/{doc=**} {
+      allow read, write: if isOwner() && request.auth.uid == uid;
+    }
+    // NOTE: docs/03 স্কেচে catalog "যেকোনো সাইন-ইন-করা ব্যবহারকারী পড়তে পারবে" লেখা, কিন্তু একই ফাইলের সতর্কতা:
+    // "v1-এ সব সাইন-ইন-করা ব্যবহারকারীর জন্য খোলা নিয়ম নয়" — তাই এখানে মালিক-ই শুধু। পাবলিক হলে খুলব।
+    match /catalog/{doc=**} {
+      allow read, write: if isOwner();
+    }
+    // বাকি সবকিছু ডিফল্টে বন্ধ। কখনো `allow write: if true` নয়।
+  }
+}
