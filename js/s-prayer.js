@@ -1,6 +1,6 @@
 import {dayTimes,computed,COMPUTED_OFFSET,hhmm,h12,toBn,KEYS} from "./prayer.js";
 const L={sahri:"সাহরি",fajr:"ফজর",zuhr:"যোহর",asr:"আসর",maghrib:"মাগরিব/ইফতার",isha:"এশা",sunrise:"সূর্যোদয়"};
-const SUS=[[6,30,"sahri","সাহরি–ফজর ব্যবধান ৫ মি (সাধারণত ৬)"],[11,24,"fajr","সাহরি–ফজর ব্যবধান ৪ মি (সাধারণত ৬)"],[5,6,"isha","গণনার সঙ্গে ২.৫ মি তফাত"]];
+const SUS=[[6,24,"maghrib","স্ক্যানে ছাপা ৫-৫৩ (৫ ঘণ্টা সম্ভব নয়); আমি ৬-৫৩ ধরেছি — আপনার সিদ্ধান্ত লাগবে"],[6,30,"sahri","সাহরি–ফজর ব্যবধান ৫ মি (সাধারণত ৬)"],[11,24,"fajr","সাহরি–ফজর ব্যবধান ৪ মি (সাধারণত ৬)"],[5,6,"isha","গণনার সঙ্গে ২.৫ মি তফাত"]];
 const SAMPLE=[[1,1],[2,28],[4,12],[8,18],[10,12],[12,12],[6,24],[6,30],[11,24],[5,6]];
 export async function render(el){
   const [P,Dd]=await Promise.all([fetch("data/prayer-dhaka.json").then(r=>r.json()),fetch("data/districts.json").then(r=>r.json())]);

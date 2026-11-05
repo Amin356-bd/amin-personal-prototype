@@ -26,9 +26,9 @@ export async function render(el){
       if(m==="periodic"){const st=await navigator.permissions.query({name:"periodic-background-sync"}).catch(()=>({state:"জানা নেই"}));if(!feat.periodic){msg.innerHTML='<span class="chip bad">Periodic Sync নেই</span>';const l=load();l.push({id,method:m,due,battery:bat,verdict:"API নেই"});save(l);draw();return}
         const l=load().filter(x=>x.method==="periodic"&&!x.verdict).concat([{id,due,title}]);await putDue(l.map(x=>({id:x.id,due:x.due,title:x.title||title})));
         await reg.periodicSync.register("amin-remind",{minInterval:60*1000});add();msg.textContent="অনুমতি: "+st.state+" · Chrome নিজে ঠিক করে কখন চালাবে (সাধারণত ঘণ্টায়/দিনে) — তাই দেরি বা না-বাজা স্বাভাবিক"}
-      if(m==="ics"){const t=makeIcs([{id,start:new Date(due),title:"AMIN পরীক্ষা (.ics)"}]);const f=new File([t],"amin-test.ics",{type:"text/calendar"});
+      if(m==="ics"){const start=due+Math.max(0,15-mins)*60000;const t=makeIcs([{id,start:new Date(start),title:"AMIN পরীক্ষা (.ics)",alarmBeforeMin:5}]);const l0=load();const f=new File([t],"amin-test.ics",{type:"text/calendar"});
         if(navigator.canShare?.({files:[f]})){try{await navigator.share({files:[f]})}catch{}}else{const a=document.createElement("a");a.href=URL.createObjectURL(f);a.download="amin-test.ics";a.click()}
-        add();msg.textContent=".ics তৈরি — খুলে ক্যালেন্ডারে যোগ করুন (ক্যালেন্ডার-অ্যাপ অ্যালার্ম ধরে কি না সেটাই পরীক্ষা)"}
+        {const l=load();l.push({id,method:m,due:start-5*60000,battery:bat});save(l);draw()}msg.innerHTML="ইভেন্ট শুরু: "+hm(start)+" · অ্যালার্ম ৫ মিনিট আগে ("+hm(start-5*60000)+")। <b>আগে দেখুন:</b> ক্যালেন্ডারে যোগ হয়েছে? ইভেন্ট খুলে 'নোটিফিকেশন/রিমাইন্ডার' সারি আছে কি? ক্যালেন্ডার-অ্যাপের নিজস্ব নোটিফিকেশন-অনুমতি চালু কি?"}
       if(m==="alarm"){const d=new Date(due);add();location.href=alarmIntent(d.getHours(),d.getMinutes(),title)}
     }catch(e){msg.innerHTML=`<span class="chip bad">ব্যর্থ</span> ${String(e.message).slice(0,160)}`}
   });
