@@ -2,7 +2,7 @@
 @font-face{font-family:Poppins;src:url(../fonts/Poppins-Medium.ttf);font-weight:500;font-display:swap}
 @font-face{font-family:Poppins;src:url(../fonts/Poppins-Bold.ttf);font-weight:700;font-display:swap}
 :root{--bg:#0B1226;--bg2:#22356B;--gold:#E3B25A;--gold2:#FFE8AE;--fg:#EAF0FF;--mut:#9fb0d8;--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.14);--solid:#16204a;--ok:#4fd18b;--bad:#ff7a7a;--warn:#ffcf5a;
- --ui:'Hind Siliguri','Noto Sans Bengali',Poppins,system-ui,sans-serif;--head:'Anek Bangla','Hind Siliguri','Noto Sans Bengali',Poppins,sans-serif;--fs:16px}
+ --ui:'Hind Siliguri','Noto Sans Bengali',Poppins,system-ui,sans-serif;--head:'Anek Bangla','Hind Siliguri','Noto Sans Bengali',Poppins,sans-serif;--fs:16px;--read:var(--ui)}
 :root[data-theme=light]{--bg:#F4F1EA;--bg2:#DDE4F5;--gold:#9A6A12;--fg:#0B1226;--mut:#4a5675;--card:rgba(255,255,255,.7);--line:rgba(11,18,38,.15);--solid:#fff}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{background:var(--bg)}html,body{margin:0;color:var(--fg);font:400 var(--fs)/1.6 var(--ui)}
@@ -89,3 +89,6 @@ table{border-collapse:collapse;width:100%;font-size:.9rem}td,th{border:1px solid
  body.printing-page>*:not(main){display:none!important}body.printing-page{background:#fff}.aurora{display:none}
  main{padding:0!important;max-width:none!important}main>*:not(#sheets){display:none!important}
  .sheet{zoom:1;margin:0;border:0;page-break-after:always}.sheet:last-child{page-break-after:auto}}
+
+.read,.long{font-family:var(--read)}
+.sample .long{font-family:inherit}
