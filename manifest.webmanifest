@@ -59,6 +59,16 @@
           "sizes": "192x192"
         }
       ]
+    },
+    {
+      "name": "নোট",
+      "url": "./index.html#/notes",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }
