@@ -9,8 +9,8 @@ export async function render(el){
   el.innerHTML=`<h1>ডেটা ও ব্যাকআপ</h1><p class="small mut">সব ডেটা এই ফোনে। ব্যাকআপ-ফাইলই আপনার নিরাপত্তা-জাল — মাসে একবার নিন।</p>
   <div class="card small">রেকর্ড: <b>${recs.filter(r=>!r.deleted).length}</b> · তোলা ফন্ট: <b>${fonts.length}</b> (${mb(fsz)}) · শেষ ব্যাকআপ: <b>${last?new Date(last).toLocaleDateString("bn-BD"):"কখনো নয়"}</b></div>
   <div class="card"><h3>ব্যাকআপ নিন</h3>
-   <label class="small">পাসফ্রেজ (ঐচ্ছিক — দিলে ফাইল এনক্রিপ্টেড): <input type="text" id="p1" autocomplete="off" style="width:100%"></label>
-   <label class="small">আবার লিখুন: <input type="text" id="p2" autocomplete="off" style="width:100%"></label>
+   <label class="small">পাসফ্রেজ (ঐচ্ছিক — দিলে ফাইল এনক্রিপ্টেড): <input type="password" id="p1" autocomplete="new-password" style="width:100%"></label>
+   <label class="small">আবার লিখুন: <input type="password" id="p2" autocomplete="new-password" style="width:100%"></label>
    <label class="small"><input type="checkbox" id="wf"> তোলা ফন্ট ফাইলসহ (${mb(fsz)} বাড়বে)</label>
    <div class="small" style="color:var(--warn)">⚠ পাসফ্রেজ ভুললে ফাইল আর খোলা যাবে না — উদ্ধারের উপায় নেই।</div>
    <div class="row" style="margin-top:8px"><button id="ex">ব্যাকআপ-ফাইল তৈরি</button></div><div id="exo" class="small"></div></div>
@@ -33,4 +33,4 @@ export async function render(el){
       o.querySelector("#mg").onclick=()=>go("merge");o.querySelector("#rp").onclick=()=>go("replace")}
     catch(err){o.innerHTML=`<span class="chip bad">${err instanceof BackupError?"গ্রহণ করা হয়নি":"ত্রুটি"}</span> ${err.message}`}finally{e.target.value=""}};
   $("#un").onclick=async()=>{try{const s=await undoLast();$("#uno").innerHTML=`<span class="chip ok">ফিরেছে</span> রেকর্ড ${s.records}`}catch(e){$("#uno").innerHTML=`<span class="chip bad">ব্যর্থ</span> ${e.message}`}};
-}
+                                                     }
