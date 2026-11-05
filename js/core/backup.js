@@ -1,5 +1,5 @@
 // Backup export/import (decision B6/B7): one file, optional passphrase (PBKDF2 → AES-GCM), integrity-checked, safe import.
-import {openDb,allFonts,putFont} from "../idb.js";
+import {openDb,allFonts,putFont,delFont} from "../idb.js";
 import {rawAll,rawPutMany,rawClear} from "./repo.js";
 export const LS_KEYS=["theme","fs","fontUI","fontRead","lite","district","ptconf","shareInbox","rem","aiCalls","lastBackupAt"];
 export const FORMAT="amin-backup",VERSION=1,ITER=600000,MAX_BYTES=60*1024*1024;
@@ -41,7 +41,7 @@ export async function openFile(text,pass){
 }
 function validate(p){
   if(!p||typeof p!=="object"||!p.meta||p.meta.app!=="AMIN")throw new BackupError("format","ব্যাকআপের বিষয়বস্তু ঠিক নেই");
-  const ls={};for(const [k,v] of Object.entries(p.ls||{}))if(LS_KEYS.includes(k)&&typeof v==="string"&&v.length<2e6)ls[k]=v; // whitelist only
+  const ls={};for(const [k,v] of Object.entries(p.ls||{}))if(LS_KEYS.includes(k)&&typeof v==="string"&&v.length<2e6)ls[k]=v;
   const records=(Array.isArray(p.records)?p.records:[]).filter(r=>r&&typeof r.key==="string"&&typeof r.coll==="string"&&r.key.startsWith(r.coll+":")&&r.tier!=="C"&&typeof r.updatedAt==="number"&&r.data&&typeof r.data==="object");
   const fonts=(Array.isArray(p.fonts)?p.fonts:[]).filter(x=>x&&typeof x.name==="string"&&x.name.length<80&&typeof x.b64==="string");
   return {meta:p.meta,ls,records,fonts};
@@ -53,16 +53,38 @@ export async function safetySnapshot(){
   await new Promise((res,rej)=>{const t=db.transaction("safety","readwrite");t.objectStore("safety").put({k:"last",at:Date.now(),snap});t.oncomplete=res;t.onerror=()=>rej(t.error)});
 }
 export async function safetyInfo(){const db=await openDb();return new Promise(res=>{const r=db.transaction("safety").objectStore("safety").get("last");r.onsuccess=()=>res(r.result?{at:r.result.at,snap:r.result.snap}:null);r.onerror=()=>res(null)})}
+async function replaceFonts(fonts){
+  const current=await allFonts();
+  for(const f of current)await delFont(f.name);
+  for(const f of fonts)await putFont(f.name,unb64(f.b64).buffer,f.type||"");
+}
 export async function apply(p,{mode="merge"}={}){
   await safetySnapshot();
-  if(mode==="replace"){await rawClear();for(const k of LS_KEYS)try{localStorage.removeItem(k)}catch{}}
+  if(mode==="replace"){
+    await rawClear();
+    for(const k of LS_KEYS)try{localStorage.removeItem(k)}catch{}
+    await replaceFonts(p.fonts);
+  }
   const cur=new Map((await rawAll()).map(r=>[r.key,r]));
-  const take=p.records.filter(r=>{const c=cur.get(r.key);return !c||r.updatedAt>c.updatedAt}); // last-write-wins on updatedAt
+  const take=p.records.filter(r=>{const c=cur.get(r.key);return !c||r.updatedAt>c.updatedAt});
   await rawPutMany(take);
   for(const [k,v] of Object.entries(p.ls)){try{if(mode==="replace"||localStorage.getItem(k)==null||k==="lastBackupAt")localStorage.setItem(k,v)}catch{}}
-  const have=new Set((await allFonts()).map(f=>f.name));
-  for(const f of p.fonts)if(mode==="replace"||!have.has(f.name))await putFont(f.name,unb64(f.b64).buffer,f.type||"");
+  if(mode!=="replace"){
+    const have=new Set((await allFonts()).map(f=>f.name));
+    for(const f of p.fonts)if(!have.has(f.name)){await putFont(f.name,unb64(f.b64).buffer,f.type||"");have.add(f.name)}
+  }
   window.AMIN_applyFonts?.();
   return {recordsWritten:take.length,fonts:p.fonts.length};
 }
-export async function undoLast(){const s=await safetyInfo();if(!s)throw new BackupError("none","পূর্বাবস্থার কপি নেই");const p=validate(s.snap);await rawClear();for(const k of LS_KEYS)try{localStorage.removeItem(k)}catch{};await rawPutMany(p.records);for(const [k,v] of Object.entries(p.ls))try{localStorage.setItem(k,v)}catch{};const have=new Set((await allFonts()).map(f=>f.name));for(const f of p.fonts)if(!have.has(f.name))await putFont(f.name,unb64(f.b64).buffer,f.type||"");window.AMIN_applyFonts?.();return summary(p)}
+export async function undoLast(){
+  const s=await safetyInfo();
+  if(!s)throw new BackupError("none","পূর্বাবস্থার কপি নেই");
+  const p=validate(s.snap);
+  await rawClear();
+  for(const k of LS_KEYS)try{localStorage.removeItem(k)}catch{}
+  await rawPutMany(p.records);
+  for(const [k,v] of Object.entries(p.ls))try{localStorage.setItem(k,v)}catch{}
+  await replaceFonts(p.fonts);
+  window.AMIN_applyFonts?.();
+  return summary(p);
+}
