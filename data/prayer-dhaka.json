@@ -802,5 +802,40 @@
 "11/24 fajr 5-00",
 "5/6 isha 7-54 (match the printed scan; oddities are in the source)"
 ],
-"asr": "Hanafi (user confirmed 2026-11-01; consistent with shadow factor 2 in tools/crosscheck.py)"
+"asr": "Hanafi (user confirmed 2026-11-01; consistent with shadow factor 2 in tools/crosscheck.py)",
+"userCheck_2026-11": "User compared 10 sample rows with the source: 8 correct, 2 incorrect (which two: not yet reported to Claude).",
+"sourceAnomalies": [
+{
+"row": "6/24",
+"field": "maghrib",
+"printedInScan": "5-53",
+"applied": "6-53",
+"why": "Zoomed re-read (220%): first digit is Bengali ৫ (5) on 24 Jun but ৬ (6) on 18 Jun and 30 Jun; 5-53 pm is impossible for a June iftar. Applied value changes only the hour digit; needs user decision (6-53 vs 6-52 by interpolation).",
+"status": "user-decision-needed"
+},
+{
+"row": "6/30",
+"field": "sahri",
+"printedInScan": "3-43",
+"applied": "3-43",
+"why": "sahri-fajr gap 5 min (usually 6) — matches the scan (user confirmed)",
+"status": "matches-scan"
+},
+{
+"row": "11/24",
+"field": "fajr",
+"printedInScan": "5-00",
+"applied": "5-00",
+"why": "gap 4 min — matches the scan (user confirmed)",
+"status": "matches-scan"
+},
+{
+"row": "5/6",
+"field": "isha",
+"printedInScan": "7-54",
+"applied": "7-54",
+"why": "2.5 min above computed — matches the scan (user confirmed)",
+"status": "matches-scan"
+}
+]
 }
