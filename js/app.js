@@ -1,6 +1,6 @@
 import {startFps,autoLite,setLite} from "./perf.js";
 import {restoreFonts} from "./idb.js";
-const R={bauth:"./s-bauth.js",bai:"./s-bai.js",bpdf:"./s-bpdf.js",bremind:"./s-bremind.js",share:"./s-share.js",today:"./s-today.js",family:"./s-family.js",path:"./s-path.js",prayer:"./s-prayer.js",hub:"./s-hub.js",fonts:"./s-fonts.js",glass:"./s-glass.js",learn:"./s-learn.js",icons:"./s-icons.js",print:"./s-print.js",install:"./s-install.js"};
+const R={settings:"./s-settings.js",data:"./s-data.js",notes:"./s-notes.js",bauth:"./s-bauth.js",bai:"./s-bai.js",bpdf:"./s-bpdf.js",bremind:"./s-bremind.js",share:"./s-share.js",today:"./s-today.js",family:"./s-family.js",path:"./s-path.js",prayer:"./s-prayer.js",hub:"./s-hub.js",fonts:"./s-fonts.js",glass:"./s-glass.js",learn:"./s-learn.js",icons:"./s-icons.js",print:"./s-print.js",install:"./s-install.js"};
 const view=document.getElementById("view");
 export const toast=(m)=>{const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("on"),2600)};
 window.toast=toast;
